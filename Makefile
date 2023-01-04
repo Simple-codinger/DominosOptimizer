@@ -39,9 +39,4 @@ clean:
 	
 all: $(TARGET)
 
-testTwo:
-	@echo $(shell echo "Hello World")
-test/%: $(SRCDIR)/%.cpp 
-	@echo "$<"
-$(SRCDIR)/%.cpp:
-	@echo "$<"
+.PHONY: all clean
