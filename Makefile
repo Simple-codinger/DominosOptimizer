@@ -1,14 +1,18 @@
 # declaring some variables
 COMPILER := g++
 TARGET := bin/dominoOptimizer
-LIB := sqlite3
+LIB := -lsqlite3
+LIBDIR := -Llib/
+LIBHEADERS := -Ilib/SQLiteCpp/include
 BINDIR := bin
 SRCDIR := src
 BUILDDIR := build
 CFLAGS := -std=c++17 -O3
 
 # execute shell command 'find': src/test1.cpp src/test2.cpp
-SOURCES := $(shell find $(SRCDIR) -type f -name *.cpp)
+SOURCES := $(wildcard $(SRCDIR)/*.cpp)
+
+# LIBSOURCES := $(shell
 # replace .cpp with .o
 OBJECTFILES := $(SOURCES:.cpp=.o)
 # replace src/* with build/*
@@ -21,7 +25,7 @@ OBJECTS := $(patsubst $(SRCDIR)/%, $(BUILDDIR)/%, $(OBJECTFILES))
 $(TARGET): $(OBJECTS)
 	@echo "Linking..."
 	@mkdir -p $(BINDIR)
-	@$(COMPILER) $^ -o $(TARGET) -l $(LIB)
+	@$(COMPILER) $^ -o $(TARGET) $(LIB) $(LIBDIR)
 
 # compile object files
 # $@ = target (in this case build/%.o)
@@ -31,12 +35,16 @@ $(TARGET): $(OBJECTS)
 # -o prevents compiler from linking the files
 $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(BUILDDIR)
-	@$(COMPILER) $(CFLAGS) -c -o $@ $^
+	@$(COMPILER) $(CFLAGS) -c -o $@ $^ $(LIBHEADERS)
 	@echo "[Compiled] $@"
+
 clean:
 	@echo "Let me clean that for you..."
 	@rm -rf $(BINDIR) $(BUILDDIR)
 	
 all: $(TARGET)
 
-.PHONY: all clean
+.PHONY: all clean test
+
+test:
+	echo $(wildcard src/*.cpp)
