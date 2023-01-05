@@ -3,16 +3,18 @@
 
 DataLoader::DataLoader(std::string db) {
 	this->_databaseLocation = db;
-	int rc = sqlite3_open(this->_databaseLocation.c_str(), &(this->_db));
-	
-	// check if database connection was successfull
-	if (rc) {
-		std::cerr << "Failed to open database" << std::endl;
-		return;
-	}	
+	std::cout << db << std::endl;
+	SQLite::Database testDb(db, SQLite::OPEN_READONLY);	
+	// sqlite3_exec(db, "SELECT * FROM pizzas", this->_callback, (void*) data, &errMsg);
+}
+
+int DataLoader::_callback(void *data, int argc, char **argv, char **azColName) {
+	for (int i = 0; i < argc; ++i){
+		std::cout << azColName[i] << (argv[i] ? argv[i] : "NULL") << std::endl;
+	}
+	return 0;
 }
 
 DataLoader::~DataLoader() {
 	sqlite3_close(this->_db);
-	// sqlite3_close(db);
 }

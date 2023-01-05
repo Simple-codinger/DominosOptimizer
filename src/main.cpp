@@ -3,6 +3,7 @@
 #include "toping.h"
 #include "pizza.h"
 #include "dataLoader.h"
+#include "graph.h"
 #include <vector>
 
 static int callback(void *data, int argc, char **argv, char **azColName) {
@@ -22,6 +23,7 @@ int main() {
 	std::vector<Pizza> pizzas;
 	
 	DataLoader dl("database.db");	
+	Graph graph(99);
 
 	char *errMsg = 0;
 	const char* data = "Callback function called";

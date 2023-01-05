@@ -6,6 +6,7 @@
 #include "pizza.h"
 #include "toping.h"
 #include <sqlite3.h>
+#include <SQLiteCpp/SQLiteCpp.h>
 
 class DataLoader {
 	private:
@@ -13,6 +14,7 @@ class DataLoader {
 		std::vector<Pizza*> _pizzas;
 		std::string _databaseLocation;
 		sqlite3* _db;
+		int _callback(void *data, int argc, char **argv, char **azColName); 
 	public:
 		DataLoader(std::string db);
 		~DataLoader();
