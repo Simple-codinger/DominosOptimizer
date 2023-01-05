@@ -1,4 +1,5 @@
 *.out
+*.db
 
 /bin
 /build
