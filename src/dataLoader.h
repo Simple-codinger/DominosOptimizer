@@ -5,7 +5,6 @@
 #include<string>
 #include "pizza.h"
 #include "toping.h"
-#include <sqlite3.h>
 #include <SQLiteCpp/SQLiteCpp.h>
 
 class DataLoader {
@@ -13,10 +12,14 @@ class DataLoader {
 		std::vector<Toping*> _topings;
 		std::vector<Pizza*> _pizzas;
 		std::string _databaseLocation;
-		sqlite3* _db;
-		int _callback(void *data, int argc, char **argv, char **azColName); 
+		SQLite::Database _database;
+		
+		Pizza* _getPizzaById(int id);
+		Toping* _getTopingById(int id);
 	public:
-		DataLoader(std::string db);
+		DataLoader(std::string dbName) : _databaseLocation(dbName), _database(dbName){};
+		void loadData();
+		inline std::vector<Pizza*> getPizzas() {return this->_pizzas;};
 		~DataLoader();
 };
 #endif

@@ -3,6 +3,7 @@
 
 /bin
 /build
+/.exrc
 
 CMakeLists.txt.user
 CMakeCache.txt
