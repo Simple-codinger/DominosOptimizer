@@ -4,6 +4,7 @@ Graph::Graph(int V) {
 	this->V = V;
 	this->adjList = new std::vector<std::pair<int, float>>[V];
 	this->Distances = new float[V];
+	this->Predecessor = new int[V];
 }
 
 void Graph::addEdge(int u, int v, float w) {
@@ -28,6 +29,7 @@ int Graph::calculateDistances(int s){
 				float weight = std::get<1>(edge);
 				if(this->Distances[u] != std::numeric_limits<float>::max() && this->Distances[u] + weight < this->Distances[v]){
 					this->Distances[v] = this->Distances[u] + weight;
+					this->Predecessor[v] = u;
 				}
 			}
 		}
@@ -50,4 +52,15 @@ int Graph::calculateDistances(int s){
 Graph::~Graph(){
 	delete[] this->adjList;
 	delete[] this->Distances;
+	delete[] this->Predecessor;
+}
+
+void Graph::printPredecessor(int* pre, int source, int v) {
+	std::cout << v << "-->";
+	int u = pre[v];
+	while(u != source) {
+		std::cout << u << "-->";
+		u = pre[u];
+	}
+	std::cout << source << std::endl;
 }

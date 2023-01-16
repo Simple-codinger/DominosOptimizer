@@ -21,4 +21,6 @@ int main() {
 	for(int i=0; i<graph.V; ++i) {
 		std::cout << "V: " << i << " | Distance: " << graph.Distances[i] << std::endl;
 	}
+	std::cout << "Print predecessors: " << std::endl;
+	Graph::printPredecessor(graph.Predecessor, 0, 1);
 }
