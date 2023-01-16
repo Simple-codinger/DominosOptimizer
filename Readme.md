@@ -22,6 +22,11 @@ cd ..
 cmake --build build/
 ````
 
+````
+touch database.db
+sqlite3 database.db < databaseSchema.sql
+````
+
 ## Run
 
 To start the script, run the following command:
