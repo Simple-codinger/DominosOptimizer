@@ -8,7 +8,7 @@ Graph::Graph(int V) {
 }
 
 void Graph::addEdge(int u, int v, float w) {
-	std::cout << "addEdge: " << u << " --> " << v << " | weight: " << w << std::endl;
+	// std::cout << "addEdge: " << u << " --> " << v << " | weight: " << w << std::endl;
 	this->adjList[u].push_back(std::make_pair(v, w));
 	//this->adjList[v].push_back(std::make_pair(u, w));
 }
@@ -63,4 +63,13 @@ void Graph::printPredecessor(int* pre, int source, int v) {
 		u = pre[u];
 	}
 	std::cout << source << std::endl;
+}
+
+std::stack<int> Graph::getPath(int v) {
+	std::stack<int> stack;
+	while (v != 0) {
+		stack.push(v);
+		v = this->Predecessor[v];
+	}
+	return stack;
 }

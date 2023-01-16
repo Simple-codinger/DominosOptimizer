@@ -6,6 +6,7 @@
 #include "toping.h"
 
 #include<vector>
+#include <algorithm>
 
 class GraphGenerator {
 	private:

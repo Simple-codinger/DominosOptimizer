@@ -38,6 +38,7 @@ void DataLoader::loadData() {
 		}
 		pizza->addToping(toping);
 	}
+	/*
 	for (int i = 0; i < this->_pizzas.size(); ++i){
 		std::cout << "Pizza: " << *this->_pizzas.at(i) << " | Toppings: ";
 		for (int j = 0; j < this->_pizzas.at(i)->getToppings().size(); ++j) {
@@ -45,6 +46,7 @@ void DataLoader::loadData() {
 		}
 		std::cout << std::endl;
 	}
+	*/
 }
 
 Pizza* DataLoader::_getPizzaById(int id) {

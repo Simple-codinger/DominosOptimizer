@@ -5,6 +5,7 @@
 #include <vector>
 #include <utility>
 #include <limits>
+#include <stack>
 
 class Graph {
 	private:
@@ -19,6 +20,7 @@ class Graph {
 		int calculateDistances(int s);	
 			
 		static void printPredecessor(int* Predecessor, int source, int v);
+		std::stack<int> getPath(int v);
 
 		~Graph();
 };

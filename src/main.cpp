@@ -5,6 +5,7 @@
 #include "graph.h"
 #include <vector>
 #include "graphGenerator.h"
+#include <stack>
 
 int main() {
 	DataLoader dl("database.db");	
@@ -17,10 +18,25 @@ int main() {
 	if(res != 1) {
 		std::cerr << "Negative cycles occured" << std::endl;
 	}
-	std::cout << "Print distances:" << std::endl;
-	for(int i=0; i<graph.V; ++i) {
-		std::cout << "V: " << i << " | Distance: " << graph.Distances[i] << std::endl;
+
+	for(int i = 0; i<pizzas.size(); ++i) {
+		std::cout << i+1 << ": " << *(pizzas.at(i)) << std::endl;
 	}
-	std::cout << "Print predecessors: " << std::endl;
-	Graph::printPredecessor(graph.Predecessor, 0, 1);
+
+	std::cout << std::endl << "Enter pizza number: ";
+	int n = 0;
+	std::cin >> n;
+
+	std::cout << std::endl << *(pizzas.at(n-1)) << " | Normal price: " << pizzas.at(n-1)->getPrice() << " | Best price: " << graph.Distances[n] << std::endl;
+
+	std::cout << "Order process: ";
+	std::stack<int> path = graph.getPath(n);
+	while (!path.empty()) {
+		std::cout << *(pizzas.at(path.top() - 1));
+		path.pop();
+		if (!path.empty()) {
+			std::cout << "-->";
+		}
+	}
+	std::cout<<std::endl;
 }

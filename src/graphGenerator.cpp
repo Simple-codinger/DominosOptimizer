@@ -22,7 +22,6 @@ Graph GraphGenerator::generateGraph(std::vector<Pizza*>& pizzas){
 						}
 					}
 				} 
-				std::cout << "HighestPrice: " << highestPrice << std::endl;	
 				// add toppings to pizza i to create pizza j
 				// accumulate all prices
 				float total = 0;
@@ -31,9 +30,8 @@ Graph GraphGenerator::generateGraph(std::vector<Pizza*>& pizzas){
 						total += t->getPrice();	
 					}
 				}
-				std::cout << "Total: " << total << std::endl;	
 				// addEdge(i+1, j+1, accumulatePrice-highestPrice)
-				graph.addEdge(i+1, j+1, total-highestPrice);
+				graph.addEdge(i+1, j+1, std::max(total-highestPrice, float(0)));
 			}
 		}
 	}
