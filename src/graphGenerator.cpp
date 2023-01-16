@@ -4,7 +4,7 @@ Graph GraphGenerator::generateGraph(std::vector<Pizza*>& pizzas){
 	Graph graph(pizzas.size()+1);
 	// add start edges
 	for(int i = 0; i<pizzas.size(); ++i) {
-		graph.addEdge(0, i+1, pizzas.at(i)->getPrice());
+		graph.addEdge(this->SourceVertex, i+1, pizzas.at(i)->getPrice());
 	}
 
 	// for each pizza, check which toppings must be removed and which have to be add to generate every other pizza
